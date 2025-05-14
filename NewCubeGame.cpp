@@ -47,10 +47,10 @@ const string lava[] = {"//","L\'"}; // 'l'
 const string inverter[] = {"++", "--"}; // 'i'
 const string key[] = {"0+", "+0"}; // 'k'
 const string door[] = {"II", "||"}; // 'd' 
-const string box[] = {"|_"}; //'b'
+const string box[] = {"%%"}; //'b'
 const string plate[] = {"()"}; //'p'
 
-#include"aaa.cpp"
+#include"map.cpp"
 
 char dynamicmap[mapY][mapX];
 
@@ -102,27 +102,6 @@ void loadmap() {
 int main(){
 startup:
 
-    //set the coordinates of the first spawn on initial boot
-
-/*
-    for (int f = 0; f < mapY; f++){
-	    for (int j = 0; j < mapX; j++) {
-            switch(dynamicmap[f][j]) {
-                case 's':
-                    spawnY = f;
-                    spawnX = j;
-                    playerY = f;
-                    playerX = j;
-                    oldplayerY = f;
-                    oldplayerX = j;
-                case 'S':
-                    ispawnY = f;
-                    ispawnX = j;
-            }
-
-	    }
-    }  
-    */
     loadmap();
     //startup_menu_drawer20000
     clear();
@@ -314,8 +293,8 @@ startup:
     "####                                                                          ####\n"
     "####                                                                          ####\n"
     "####                                                                          ####\n";
-
     switch(counter){
+
         case 0:
             cout << 
             "####           #########                                                      ####\n"
@@ -393,6 +372,10 @@ startup:
     newmap:
     //load the spawn of the first map
     loadmap();
+
+
+
+
 
 
 
@@ -565,12 +548,27 @@ startup:
                 }
 		        break;
 	        case 'b':
-                /*
-                switch(input) {//checks where the player moved into the box from
+                
+                //for (int i = 0; i < currentboxes.size(); i++) {
+                    //boxes& temporaryvec = currentboxes[i]; //goes through all the boxes
+                    //temporaryvec.print();
+                    //cout << endl;
+                    //if (temporaryvec == boxes(playerY, playerX)) {// if it matches the players pos
+                        //cout << "touching player" << endl;
+
+
+                        switch(input) {//checks where the player moved into the box from
                     case 'w':
-                        if (dynamicmap[playerY + 1][playerX] != (('w') || ('b'))) {
+                        if ((dynamicmap[playerY - 1][playerX] != 'b') && (dynamicmap[playerY - 1][playerX] != 'w')) {
                             oldplayerX = playerX;
                             oldplayerY = playerY;
+                            //playerY++;
+                            dynamicmap[playerY - 1][playerX] = 'b';
+                            
+                            if (map[currentmap][playerY][playerX] != 'b') {//check for what was behind the box
+                                dynamicmap[playerY][playerX] = map[currentmap][playerY][playerX];
+                            } else {
+                                dynamicmap[playerY][playerX] = 'a';
                             }
                         } else {
                             playerX = oldplayerX;
@@ -579,24 +577,69 @@ startup:
 
                         break;
                     case 'a':
-                        playerX = oldplayerX;
-                        playerY = oldplayerY;
+                        if ((dynamicmap[playerY][playerX -1] != 'b') && (dynamicmap[playerY][playerX -1] != 'w')) {
+                            oldplayerX = playerX;
+                            oldplayerY = playerY;
+                            //playerX--;
+                            dynamicmap[playerY][playerX -1] = 'b';
+                            if (map[currentmap][playerY][playerX] != 'b') {
+                                dynamicmap[playerY][playerX] = map[currentmap][playerY][playerX];
+                            } else {
+                                dynamicmap[playerY][playerX] = 'a';
+                            }
+                        } else {
+                            playerX = oldplayerX;
+                            playerY = oldplayerY;
+                        }
                         break;
                     case 's':
-                        playerX = oldplayerX;
-                        playerY = oldplayerY;
+                        if ((dynamicmap[playerY +1][playerX] != 'b') && (dynamicmap[playerY +1][playerX] != 'w')) {
+                            oldplayerX = playerX;
+                            oldplayerY = playerY;
+                            //playerY--;
+                            dynamicmap[playerY + 1][playerX] = 'b';
+                            if (map[currentmap][playerY][playerX] != 'b') {
+                                dynamicmap[playerY][playerX] = map[currentmap][playerY][playerX];
+                            } else {
+                                dynamicmap[playerY][playerX] = 'a';
+                            }
+                        } else {
+                            playerX = oldplayerX;
+                            playerY = oldplayerY;
+                        } 
                         break;
                     case 'd':
-                        playerX = oldplayerX;
-                        playerY = oldplayerY;
+                        if ((dynamicmap[playerY][playerX +1] != 'b') && (dynamicmap[playerY][playerX +1] != 'w')) {
+                            oldplayerX = playerX;
+                            oldplayerY = playerY;
+                            //playerX++;
+                            dynamicmap[playerY][playerX + 1] = 'b';
+                            if (map[currentmap][playerY][playerX] != 'b') {
+                                dynamicmap[playerY][playerX] = map[currentmap][playerY][playerX];
+                            } else {
+                                dynamicmap[playerY][playerX] = 'a';
+                            }
+                        } else {
+                            playerX = oldplayerX;
+                            playerY = oldplayerY;
+                        }
                         break;
-                }*/
+                    }
                 break;
+
+                
+                
 		        
 	        case 'g':
+                oldplayerX = playerX;
+                oldplayerY = playerY;
 		        currentmap++;
 		        goto newmap;
-	        
+            case 'p':
+                oldplayerX = playerX;
+                oldplayerY = playerY;
+                break;
+
             case 'd':
                 if (keynumber > 0) {
                     oldplayerX = playerX;
@@ -606,6 +649,8 @@ startup:
                     playerY = oldplayerY;                    
                 }
             case 'k':
+                oldplayerX = playerX;
+                oldplayerY = playerY;
                 keynumber++;
                 break;
             //case 'i':

@@ -1,0 +1,24 @@
+inversed - inversed-spawn
+
+key - door
+
+lever - gate
+
+pushing blocks?
+
+pressure plates?
+
+you can push blocks, place them to walk over lava, can push a block into a fallen block
+
+pq :: gates _/ and \_ for levers
+
+[> door
+
+<] exit door
+
+>] one-way? 
+
+
+|_ block not lava?
+L` block in lava?
+
