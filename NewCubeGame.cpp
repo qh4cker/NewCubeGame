@@ -18,6 +18,8 @@ char getch() {
 }
 */
 
+bool debug = false;
+bool cheats = false;
 int counter = 0;
 char input;
 char menuinput;
@@ -118,6 +120,8 @@ bool checkforpressureplates() {
 
 int main(){
 startup:
+    cheats = false;
+    debug = false;
 currentmap = 0;
     loadmap();
     //startup_menu_drawer20000
@@ -178,30 +182,123 @@ currentmap = 0;
 
     options:
     clear();
+    counter = 0;
     while (true) {
-    cout << 
-    "##################################################################################\n"
-    "##################################################################################\n"
-    "####                                                                          ####\n"
-    "####                                                                          ####\n"
-    "####                                                                          ####\n"
-    "####                                                                          ####\n"
-    "####                                Options                                   ####\n"
-    "####                                                                          ####\n"
-    "####                                                                          ####\n"
-    "####                                                                          ####\n"
-    "####                                                                          ####\n"
-    "####                   there isnt anything get trolled lmao                   ####\n"
-    "####                                                                          ####\n"
-    "####                                                                          ####\n"
-    "####                                                                          ####\n"
-    "####                                                                          ####\n"
-    "####                                                                          ####\n"
-    "####                                                                          ####\n"
-    "##################################################################################\n"
-    "##################################################################################\n";
-    getch();
-    goto mainmenu ; 
+        cout <<
+            "##################################################################################\n"
+            "##################################################################################\n"
+            "####                                                                          ####\n"
+            "####                                                                          ####\n"
+            "####                                                                          ####\n"
+            "####                                                                          ####\n"
+            "####                                Options!!!!                               ####\n"
+            "####                                                                          ####\n"
+            "####                                                                          ####\n";
+
+        if (debug) {
+            if (counter == 2) {
+                cout <<
+                    "####          #######                                          X              ####\n"
+                    "####          #Debug#                                       X X               ####\n"
+                    "####          #######                                        X                ####\n";
+            }
+            else {
+                cout <<
+                    "####                                                           X              ####\n"
+                    "####           Debug                                        X X               ####\n"
+                    "####                                                         X                ####\n";
+            }
+        } else {
+            if (counter == 2) {
+                cout <<
+                    "####          #######                                       X X               ####\n"
+                    "####          #Debug#                                        X                ####\n"
+                    "####          #######                                       X X               ####\n";
+            }
+            else {
+                cout <<
+                    "####                                                        X X               ####\n"
+                    "####           Debug                                         X                ####\n"
+                    "####                                                        X X               ####\n";
+            }
+        }
+        cout <<
+            "####                                                                          ####\n";
+        if (cheats) {
+            if (counter == 1) {
+                cout <<
+                    "####          #######X                                         X              ####\n"
+                    "####          #cheats#                                      X X               ####\n"
+                    "####          #######X                                       X                ####\n";
+            }
+            else {
+                cout <<
+                    "####                                                           X              ####\n"
+                    "####           cheats                                       X X               ####\n"
+                    "####                                                         X                ####\n";
+            }
+        }
+        else {
+            if (counter == 1) {
+                cout <<
+                    "####          #######X                                      X X               ####\n"
+                    "####          #cheats#                                       X                ####\n"
+                    "####          #######X                                      X X               ####\n";
+            }
+            else {
+                cout <<
+                    "####                                                        X X               ####\n"
+                    "####           cheats                                        X                ####\n"
+                    "####                                                        X X               ####\n";
+            }
+        }
+        cout <<
+            "####                                                                          ####\n";
+
+        if (counter == 0) {
+            cout <<
+                "####          ######                                                          ####\n"
+                "####          #exit#                                                          ####\n"
+                "####          ######                                                          ####\n";
+        } else {
+            cout <<
+                "####                                                                          ####\n"
+                "####           exit                                                           ####\n"
+                "####                                                                          ####\n";
+        }
+
+        cout <<
+            "####                                                                          ####\n"
+            "##################################################################################\n"
+            "##################################################################################\n";
+        input = getch();
+        switch (input) {
+        case 's':
+            counter--;
+            break;
+        case 'w':
+            counter++;
+            break;
+        case 'x':
+            cout << "you left" << endl;
+            goto end;
+        case 'q'://this is enter key
+            switch (counter) {
+            case 0:
+                goto mainmenu;
+                break;
+            case 1:
+                cheats = true;//this makes it so you cant put cheats back off
+                break;
+            case 2://this is enter key
+                debug = !debug;
+                break;
+            }
+        }
+        counter = max(counter, 0);
+        counter = min(counter, 2);
+        clear();
+    }
 
     tutorial:
     counter = 0;
@@ -212,48 +309,140 @@ currentmap = 0;
             case 0:
                 cout << 
                 "##################################################################################\n"
-                "##                                  {}##                                        ##\n"
-                "##                                    ##  Welcome to the tutorial!              ##\n" //you are a cube \"[]\" and your goal is to get to the goal \"{}\"
-                "##                                    ##                                        ##\n"
-                "##                                    ##  This is more of a slideshow btw       ##\n" // \"//\" is deadly, it returns you to spawn \"<>\"
-                "##                                    ##                                        ##\n"
-                "##                                    ##  Type a or d to cycle between slides   ##\n"
-                "##                                    ##                                        ##\n"
-                "##                                    ##  And enter to exit to the main menu    ##\n"
-                "##                                    ##                                        ##\n"
-                "##                                    ##                                        ##\n"
-                "##                                    ##                                        ##\n"
-                "##                                    ##                                        ##\n"
-                "##                                    ##                                        ##\n"
-                "##                                    ##                                        ##\n"
-                "##                                    ##                                        ##\n"
-                "##                                    ##                                        ##\n"
-                "##                                    ##                                        ##\n"
-                "##[]                                  ##                                        ##\n"
+                "##          //              ##        ##                                        ##\n"
+                "##  %%  %%  //      ()      ##   {}   ##  Welcome to the tutorial!              ##\n" //you are a cube \"[]\" and your goal is to get to the goal \"{}\"
+                "##          //              ##        ##                                        ##\n"
+                "######HH######              ##   ++   ##  This is more of a slideshow btw       ##\n" // \"//\" is deadly, it returns you to spawn \"<>\"
+                "##          ##              ##        ##                                        ##\n"
+                "##          ##              ##        ##  Type a or d to cycle between slides   ##\n"
+                "##    _/    ##              ##        ##                                        ##\n"
+                "##          ##              ##        ##  And enter to exit to the main menu    ##\n"
+                "##          ##              ##        ##                                        ##\n"
+                "##          ##              ##        ##                                        ##\n"
+                "######II######              ##        ##                                        ##\n"
+                "##          ##              ##        ##                                        ##\n"
+                "##    0+    ##              ##        ##                                        ##\n"
+                "##          ##              ##        ##                                        ##\n"
+                "##          ##      ++      ##        ##                                        ##\n"
+                "##          ##              ##        ##                                        ##\n"
+                "##          ##              ##   ><   ##                                        ##\n"
+                "##[]        ##//////////////##        ##                                        ##\n"
                 "##################################################################################\n";     
                 break;
             case 1:
                 cout << 
                 "##################################################################################\n"
-                "##                                  {}##                                        ##\n"
-                "##                                    ##  You play as a cube \"[]\"               ##\n" 
-                "##                                    ##                                        ##\n"
-                "##                                    ##  you move with \"wasd\"                  ##\n" 
-                "##                                    ##                                        ##\n"
-                "##                                    ##  and you want to get to the goal \"{}\"  ##\n"
-                "##                                    ##                                        ##\n"
-                "##                                    ##                                        ##\n"
-                "##                                    ##                                        ##\n"
-                "##                                    ##  You also want to avoid lava \"//\"      ##\n"
-                "##                                    ##                                        ##\n"
-                "##                                    ##                                        ##\n"
-                "##                                    ##                                        ##\n"
-                "##                                    ##                                        ##\n"
-                "##                                    ##                                        ##\n"
-                "##                                    ##                                        ##\n"
-                "##                                    ##                                        ##\n"
-                "##<>  []                              ##                                        ##\n"
+                "##          //              ##        ##                                        ##\n"
+                "##  %%  %%  //      ()      ##   {}   ##  You play as a cube \"[]\"               ##\n" 
+                "##          //              ##        ##                                        ##\n"
+                "######HH######              ##   ++   ##  you move with \"wasd\"                  ##\n" 
+                "##          ##              ##        ##                                        ##\n"
+                "##          ##              ##        ##  and you want to get to the goal \"{}\"  ##\n"
+                "##    _/    ##              ##        ##                                        ##\n"
+                "##          ##              ##        ##                                        ##\n"
+                "##          ##              ##        ##                                        ##\n"
+                "##          ##              ##        ##  You also want to avoid lava \"//\"      ##\n"
+                "######II######              ##        ##                                        ##\n"
+                "##          ##              ##        ##  or you'll respawn at the spawn \"<>\".  ##\n"
+                "##    0+    ##              ##        ##                                        ##\n"
+                "##          ##              ##        ##                                        ##\n"
+                "##          ##      ++      ##        ##                                        ##\n"
+                "##          ##              ##        ##                                        ##\n"
+                "##          ##              ##   ><   ##                                        ##\n"
+                "##<>  []    ##//////////////##        ##                                        ##\n"
                 "##################################################################################\n";
+                break;
+            case 2:
+                cout <<
+                    "##################################################################################\n"
+                    "##          //              ##        ##                                        ##\n"
+                    "##  %%  %%  //      ()      ##   {}   ##  There are some tiles you can touch    ##\n" //you are a cube \"[]\" and your goal is to get to the goal \"{}\"
+                    "##          //              ##        ##                                        ##\n"
+                    "######HH######              ##   ++   ##  There are keys \"0+\"                   ##\n" // \"//\" is deadly, it returns you to spawn \"<>\"
+                    "##          ##              ##        ##                                        ##\n"
+                    "##          ##              ##        ##  Which can open doors \"II\"             ##\n"
+                    "##    _/    ##              ##        ##                                        ##\n"
+                    "##          ##              ##        ##                                        ##\n"
+                    "##          ##              ##        ##  There are also levers \"_/\"            ##\n"
+                    "##          ##              ##        ##                                        ##\n"
+                    "######II######              ##        ##  Which can open gates \"HH\"             ##\n"
+                    "##          ##              ##        ##                                        ##\n"
+                    "##    0+    ##              ##        ##                                        ##\n"
+                    "##          ##              ##        ##  These tiles act differently if you    ##\n"
+                    "##          ##      ++      ##        ##                                        ##\n"
+                    "##    []    ##              ##        ##  have touched the inversed tile \"++\"   ##\n"
+                    "##          ##              ##   ><   ##                                        ##\n"
+                    "##<>        ##//////////////##        ##                                        ##\n"
+                    "##################################################################################\n";
+                break;
+            case 3:
+                cout <<
+                    "##################################################################################\n"
+                    "##          //              ##        ##                                        ##\n"
+                    "##  %%  %%  //      ()      ##   {}   ##  There also are boxes \"%%\"             ##\n" //you are a cube \"[]\" and your goal is to get to the goal \"{}\"
+                    "##    []    //              ##        ##                                        ##\n"
+                    "######::######              ##   ++   ##                                        ##\n"
+                    "##          ##              ##        ##  You can only push them around         ##\n" // \"//\" is deadly, it returns you to spawn \"<>\"
+                    "##          ##              ##        ##                                        ##\n"
+                    "##    _/    ##              ##        ##  You can push them into lava \"//\"      ##\n"
+                    "##          ##              ##        ##                                        ##\n"
+                    "##          ##              ##        ##  to make a walkable path \"L\'\"          ##\n"
+                    "##          ##              ##        ##                                        ##\n"
+                    "######||######              ##        ##  Or put them on pressure plates \"()\"   ##\n"
+                    "##          ##              ##        ##                                        ##\n"
+                    "##          ##              ##        ##  To unlock the goal                    ##\n"
+                    "##          ##              ##        ##                                        ##\n"
+                    "##          ##      ++      ##        ##                                        ##\n"
+                    "##          ##              ##        ##                                        ##\n"
+                    "##          ##              ##   ><   ##                                        ##\n"
+                    "##<>        ##//////////////##        ##                                        ##\n"
+                    "##################################################################################\n";
+                break;
+            case 4:
+                cout <<
+                    "##################################################################################\n"
+                    "##          //              ##        ##                                        ##\n"
+                    "##          L\'      %%      ##   {}   ##  The inverter \"++\" allows you to       ##\n" //you are a cube \"[]\" and your goal is to get to the goal \"{}\"
+                    "##          //              ##        ##                                        ##\n"
+                    "######::######              ##   ++   ##  become inverted, this has various     ##\n" // \"//\" is deadly, it returns you to spawn \"<>\"
+                    "##          ##              ##        ##                                        ##\n"
+                    "##          ##              ##        ##  effects.                              ##\n"
+                    "##    _/    ##              ##        ##                                        ##\n"
+                    "##          ##              ##        ##  For example, if you were to die,      ##\n"
+                    "##          ##              ##        ##                                        ##\n"
+                    "##          ##              ##        ##  you would respawn at the inverted     ##\n"
+                    "######||######              ##        ##                                        ##\n"
+                    "##          ##      []      ##        ##  spawn \"><\"                            ##\n"
+                    "##          ##              ##        ##                                        ##\n"
+                    "##          ##              ##        ##                                        ##\n"
+                    "##          ##      ++      ##        ##                                        ##\n"
+                    "##          ##              ##        ##                                        ##\n"
+                    "##          ##              ##   ><   ##                                        ##\n"
+                    "##<>        ##//////////////##        ##                                        ##\n"
+                    "##################################################################################\n";
+                break;
+            case 5:
+                cout <<
+                    "##################################################################################\n"
+                    "##          //              ##        ##                                        ##\n"
+                    "##          L\'      %%      ##   {}   ##  Btw, you have to be uninverted        ##\n" //you are a cube \"[]\" and your goal is to get to the goal \"{}\"
+                    "##          //              ##        ##                                        ##\n"
+                    "######::######              ##   --   ##  to enter the regular portals          ##\n" // \"//\" is deadly, it returns you to spawn \"<>\"
+                    "##          ##              ##        ##                                        ##\n"
+                    "##          ##              ##        ##  otherwise it will have no effects     ##\n"
+                    "##    _/    ##              ##        ##                                        ##\n"
+                    "##          ##              ##        ##                                        ##\n"
+                    "##          ##              ##   ][   ##                                        ##\n"
+                    "##          ##              ##        ##                                        ##\n"
+                    "######||######              ##        ##                                        ##\n"
+                    "##          ##              ##        ##                                        ##\n"
+                    "##          ##              ##        ##                                        ##\n"
+                    "##          ##              ##        ##                                        ##\n"
+                    "##          ##      --      ##        ##  You should now be ready to brace      ##\n"
+                    "##          ##              ##        ##                                        ##\n"
+                    "##          ##              ##   ><   ##  the dangers of the levels GLHF :D     ##\n"
+                    "##<>        ##//////////////##        ##                                        ##\n"
+                    "##################################################################################\n";
                 break;
         }
 
@@ -272,10 +461,8 @@ currentmap = 0;
                 goto end;
         }
  		counter = max(counter,0);
-		counter = min(counter,4);    
+		counter = min(counter,5);    
     }
-
-
 
     mainmenu:
     counter = 2;
@@ -368,27 +555,15 @@ currentmap = 0;
     }// end of mainmenu loop
 
 
-
-
-
     newmap:
     //load the spawn of the first map
     loadmap();
-
-
-
-
-
-
-
-
 
     //############################################ game here
     game:
 
     while (true){
     //map_drawer3000
-    clear();
     string temp;
 	for (int f = 0; f < mapY; f++){
 
@@ -502,27 +677,23 @@ currentmap = 0;
 		}
         temp += "\n";
 	}        
+	    clear();
             cout << temp;
 
         //sigma_displayer_7000
-        cout << "playerX: " <<playerX << endl;
-        cout << "playerY: " <<playerY << endl;
-        cout << "currentmap: " <<currentmap << endl;
-	    cout << "inversed: " <<inversed << endl;
-        cout << "spawnX: " <<spawnX << endl;
-        cout << "spawnY: " <<spawnY << endl;
-        cout << "ispawnX: " <<ispawnX << endl;
-        cout << "ispawnY: " <<ispawnY << endl;
-        cout << "keycollected: " << keycollected << endl;
-        cout << "invertedkeycollected: " << inversedkeycollected << endl;
-        cout << "switeched?: " << switched << endl;
-
-
-
-
-
-
-
+            if (debug) {
+                cout << "playerX: " <<playerX << endl;
+                cout << "playerY: " <<playerY << endl;
+                cout << "currentmap: " <<currentmap << endl;
+	            cout << "inversed: " <<inversed << endl;
+                cout << "spawnX: " <<spawnX << endl;
+                cout << "spawnY: " <<spawnY << endl;
+                cout << "ispawnX: " <<ispawnX << endl;
+                cout << "ispawnY: " <<ispawnY << endl;
+                cout << "keycollected: " << keycollected << endl;
+                cout << "invertedkeycollected: " << inversedkeycollected << endl;
+                cout << "switeched?: " << switched << endl;
+            }
         //input_gatherer_4000
         input = getch();
         switch(input){
@@ -543,14 +714,18 @@ currentmap = 0;
                 playerX++;
                 break; 
             case 'e':
+                if (cheats) {
                 cout << "you go back in time" << endl;
                 currentmap--;
                 loadmap();
+                }
                 break; 
             case 'r':
+                if (cheats) {
                 cout << "you go foward in time" << endl;
                 currentmap++;
                 loadmap();
+                }
                 break; 
             case 'f':
                 cout << "you feel like going backwards" << endl;
@@ -567,12 +742,6 @@ currentmap = 0;
         }
 
         //mapupdater77000
-
-
-
-
-
-
 
         //relax, ill handle these events "TM"
         switch (dynamicmap[playerY][playerX]) {
@@ -955,7 +1124,7 @@ currentmap = 0;
 
         }
 
-        }
+
 
         
 
